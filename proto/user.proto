@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package user;
+
+message User {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+  string password = 4;
+}
+
+message CreateUserRequest {
+  string name = 1;
+  string email = 2;
+  string password = 3;
+}
+
+message CreateUserResponse {
+  User user = 1;
+}
+
+message LoginRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message LoginResponse {
+  string token = 1;
+}
+
+service UserService {
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+  rpc Login(LoginRequest) returns (LoginResponse);
+  rpc Logout(Empty) returns (Empty);
+  rpc UpdateUser(User) returns (User);
+  rpc DeleteUser(Empty) returns (Empty);
+}
+
+message Empty {}
